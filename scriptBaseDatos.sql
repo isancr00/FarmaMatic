@@ -8,11 +8,19 @@ CREATE TABLE roles(
     PRIMARY KEY (IdRol)
 );
 
+CREATE TABLE copagos(
+    IdCopago int(11) NOT NULL AUTO_INCREMENT,
+    Porcentaje int(11) NOT NULL,
+    PRIMARY KEY (IdCopago)    
+);
+
 CREATE TABLE clientes(
     IdCLiente int(11) NOT NULL AUTO_INCREMENT,
     NombreCliente VARCHAR(300) NOT NULL,
-    Subvencionado BIT NOT NULL,
-    PRIMARY KEY (IdCliente)
+    IdCopago int(11) NOT NULL,
+    PRIMARY KEY (IdCliente),
+    CONSTRAINT FK_Copago FOREIGN KEY (IdCopago) REFERENCES copagos (IdCopago)
+
 );
 
 CREATE TABLE empleados(
@@ -24,7 +32,7 @@ CREATE TABLE empleados(
     IdRol int(11) NOT NULL,
 
     PRIMARY KEY (IdEmpleado),
-    CONSTRAINT FK_Rol FOREIGN KEY (IdRol) REFERENCES roles (IdRol)
+    CONSTRAINT FK_Rol2 FOREIGN KEY (IdRol) REFERENCES roles (IdRol)
 );
 
 CREATE TABLE ventas(
@@ -59,7 +67,9 @@ CREATE TABLE productos(
     Caducidad int(11) not null,
     Nombre varchar(100) not null,
     Descripcion varchar(300) not null,
-    Importe int(11) not null,
+    PVP int(11) not null,
+    IVA int(11) not null,
+    Subvencionada BIT not NULL,
     IdProoveedor int(11) not null,
     PRIMARY KEY(IdProducto),
     CONSTRAINT FK_Prooveedor2 FOREIGN KEY (IdProoveedor) REFERENCES prooveedores (IdProoveedor)
@@ -68,8 +78,6 @@ CREATE TABLE productos(
 CREATE TABLE detalleVentaProd(
     IdProducto int(11) not null,
     IdDetalleVenta int(11) not null,
-    Unidades int(11) not null,
-
     CONSTRAINT FK_Producto FOREIGN KEY (IdProducto) REFERENCES productos (IdProducto),
     CONSTRAINT FK_DetalleVenta FOREIGN KEY (IdDetalleVenta) REFERENCES detalleDeVenta (IdDetalleVenta)
 );
