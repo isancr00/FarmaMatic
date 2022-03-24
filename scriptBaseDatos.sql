@@ -46,13 +46,23 @@ CREATE TABLE detalleDeVenta(
     CONSTRAINT FK_Venta FOREIGN KEY (IdVenta) REFERENCES ventas (IdVenta)
 );
 
+
+CREATE TABLE prooveedores(
+    IdProoveedor int(11) not null AUTO_INCREMENT,
+    Nombre VARCHAR(100) not null,
+    PRIMARY KEY(IdProoveedor)
+);
+
+
 CREATE TABLE productos(
     IdProducto int(11) not null,
     Caducidad int(11) not null,
     Nombre varchar(100) not null,
     Descripcion varchar(300) not null,
     Importe int(11) not null,
-    PRIMARY KEY(IdProducto)
+    IdProoveedor int(11) not null,
+    PRIMARY KEY(IdProducto),
+    CONSTRAINT FK_Prooveedor2 FOREIGN KEY (IdProoveedor) REFERENCES prooveedores (IdProoveedor)
 );
 
 CREATE TABLE detalleVentaProd(
@@ -62,12 +72,6 @@ CREATE TABLE detalleVentaProd(
 
     CONSTRAINT FK_Producto FOREIGN KEY (IdProducto) REFERENCES productos (IdProducto),
     CONSTRAINT FK_DetalleVenta FOREIGN KEY (IdDetalleVenta) REFERENCES detalleDeVenta (IdDetalleVenta)
-);
-
-CREATE TABLE prooveedores(
-    IdProoveedor int(11) not null AUTO_INCREMENT,
-    Nombre VARCHAR(100) not null,
-    PRIMARY KEY(IdProoveedor)
 );
 
 CREATE TABLE compras(
