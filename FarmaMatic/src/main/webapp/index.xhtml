@@ -1,12 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Inicio de Sesión</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <img src="diagrama.png" align="center"/>
+         <h:form>
+            <div align="center" style="position: fixed; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+                <p:panel header="Inicio de Sesión" style="width:500px">
+                <p:panelGrid columns="2" layout="grid">
+                    <p:outputLabel value="Nombre de usuario"/>
+                    <p:inputText value="#{indexController.usuario.user}"/>
+
+                    <p:outputLabel value="Password"/>
+                    <p:password value="#{indexController.usuario.password}"/>
+
+                    <p:outputLabel value=""/>
+                    <p:commandButton value="Acceder" ajax="false" action="#{indexController.verificarUsuario()}"/>            
+
+                </p:panelGrid>
+            </p:panel>
+            </div>
+        </h:form>
     </h:body>
 </html>
 
