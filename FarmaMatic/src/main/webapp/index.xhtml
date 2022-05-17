@@ -12,10 +12,10 @@
                 <p:panel header="Inicio de Sesión" style="width:500px">
                 <p:panelGrid columns="2" layout="grid">
                     <p:outputLabel value="Nombre de usuario"/>
-                    <p:inputText value="#{indexController.usuario.user}"/>
+                    <p:inputText value="#{indexController.empleado.nombreUsuario}"/>
 
                     <p:outputLabel value="Password"/>
-                    <p:password value="#{indexController.usuario.password}"/>
+                    <p:password value="#{indexController.empleado.contrasenia}"/>
 
                     <p:outputLabel value=""/>
                     <p:commandButton value="Acceder" ajax="false" action="#{indexController.verificarUsuario()}"/>            
