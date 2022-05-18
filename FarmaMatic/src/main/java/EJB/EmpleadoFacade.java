@@ -30,7 +30,7 @@ public class EmpleadoFacade extends AbstractFacade<Empleado> implements Empleado
     public EmpleadoFacade() {
         super(Empleado.class);
     }
-
+    
     @Override
     public Empleado verificarEmpleado(Empleado empleado) {
         Empleado devuelve = null;
@@ -49,5 +49,4 @@ public class EmpleadoFacade extends AbstractFacade<Empleado> implements Empleado
             return devuelve;
         }
     }
-    
 }

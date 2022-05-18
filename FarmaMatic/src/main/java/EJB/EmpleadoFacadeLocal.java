@@ -29,7 +29,7 @@ public interface EmpleadoFacadeLocal {
     List<Empleado> findRange(int[] range);
 
     int count();
-
-    public Empleado verificarEmpleado(Empleado empleado);
+    
+    Empleado verificarEmpleado(Empleado empleado);
     
 }
