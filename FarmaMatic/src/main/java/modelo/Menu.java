@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author sanch
  */
 @Entity
-@Table
+@Table(name = "menus")
 public class Menu implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
