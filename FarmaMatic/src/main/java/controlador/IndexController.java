@@ -9,8 +9,8 @@ import EJB.EmpleadoFacadeLocal;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Empleado;
 
@@ -20,7 +20,7 @@ import modelo.Empleado;
  */
 
 @Named
-@ViewScoped
+@SessionScoped
 public class IndexController implements Serializable {
     private Empleado empleado;
     
@@ -43,8 +43,7 @@ public class IndexController implements Serializable {
             System.out.println("Insuficiente");
             return "noPermiso.xhtml";
         }else{
-            System.out.println("Suficiente");
-            
+            System.out.println("Suficiente");  
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleado", empleadoB);
             return "privado/principal.xhtml";
         }

@@ -40,14 +40,18 @@ public class MenuController implements Serializable{
     public void obtenerMenu(){
         
         Empleado devuelve = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleado");   
-        List<Menu> menus = menuEJB.obtenerMenusUsuario(devuelve);
         
-        for(int i = 0;i<menus.size();i++){
-            Menu menu = menus.get(i);
-            DefaultMenuItem item = DefaultMenuItem.builder().value(menu.getNombre()).url(menu.getUrl()).build();
-            item.setUrl(menu.getUrl());
-            modelo.getElements().add(item);     
+        if(devuelve != null){
+            List<Menu> menus = menuEJB.obtenerMenusUsuario(devuelve);
+
+            for(int i = 0;i<menus.size();i++){
+                Menu menu = menus.get(i);
+                DefaultMenuItem item = DefaultMenuItem.builder().value(menu.getNombre()).url(menu.getUrl()).build();
+                item.setUrl(menu.getUrl());
+                modelo.getElements().add(item);     
+            }
         }
+     
         
     }
     
