@@ -46,8 +46,8 @@ public class MenuController implements Serializable{
             Menu menu = menus.get(i);
             DefaultMenuItem item = DefaultMenuItem.builder().value(menu.getNombre()).url(menu.getUrl()).build();
             item.setUrl(menu.getUrl());
-            modelo.getElements().add(item);            
-        }   
+            modelo.getElements().add(item);     
+        }
         
     }
     

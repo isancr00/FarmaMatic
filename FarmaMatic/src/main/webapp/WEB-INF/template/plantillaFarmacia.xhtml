@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
-        <title>Plantilla</title>
+        <title>FarmaMatic</title>
     </h:head>
 
     <h:body>
@@ -19,8 +19,13 @@
             <h:form>
                 
                 <f:event type="preRenderView" listener="#{plantillaController.verificarYMostrar()}"/>
-                <p:menubar model="#{menuController.modelo}"/>
-                <p:commandButton value="Cerrar Sesión" action="#{menuController.destruirSesion()}"/>
+                <p:menubar model="#{menuController.modelo}">
+                
+                    <f:facet name="options">
+                        <p:commandButton value="Cerrar Sesión" action="#{menuController.destruirSesion()}"/>
+                    </f:facet>
+                
+                </p:menubar>
             </h:form>
         </div>
 
