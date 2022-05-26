@@ -28,9 +28,9 @@ public interface MenuFacadeLocal {
     List<Menu> findAll();
 
     List<Menu> findRange(int[] range);
+    
+    List<Menu> obtenerMenusUsuario(Empleado devuelve);
 
     int count();
-
-    public List<Menu> obtenerMenusUsuario(Empleado devuelve);
     
 }

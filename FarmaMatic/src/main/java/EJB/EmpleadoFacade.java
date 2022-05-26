@@ -31,7 +31,7 @@ public class EmpleadoFacade extends AbstractFacade<Empleado> implements Empleado
         super(Empleado.class);
     }
     
-    @Override
+     @Override
     public Empleado verificarEmpleado(Empleado empleado) {
         Empleado devuelve = null;
         String consulta = "FROM Empleado e WHERE e.nombreUsuario=:param1 and e.contrasenia=:param2";
@@ -49,4 +49,5 @@ public class EmpleadoFacade extends AbstractFacade<Empleado> implements Empleado
             return devuelve;
         }
     }
+    
 }

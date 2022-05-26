@@ -27,9 +27,8 @@ public interface EmpleadoFacadeLocal {
     List<Empleado> findAll();
 
     List<Empleado> findRange(int[] range);
+    Empleado verificarEmpleado(Empleado empleado);
 
     int count();
-    
-    Empleado verificarEmpleado(Empleado empleado);
     
 }
