@@ -39,70 +39,17 @@ public class Producto implements Serializable {
     private String descripcion;
     
     @Column(name = "pvp")
-    private int pvp;
+    private float pvp;
     
     @Column(name = "iva")
     private int iva;
     
-    @Column(name = "suvbencionada")
+    @Column(name = "subvencionada")
     private boolean suvbencionada;
     
     @JoinColumn(name = "idProoveedor")
     @OneToOne(cascade = CascadeType.PERSIST)
     private Prooveedor prooveedor;
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.idProducto;
-        hash = 41 * hash + Objects.hashCode(this.caducidad);
-        hash = 41 * hash + Objects.hashCode(this.nombre);
-        hash = 41 * hash + Objects.hashCode(this.descripcion);
-        hash = 41 * hash + this.pvp;
-        hash = 41 * hash + this.iva;
-        hash = 41 * hash + (this.suvbencionada ? 1 : 0);
-        hash = 41 * hash + Objects.hashCode(this.prooveedor);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Producto other = (Producto) obj;
-        if (this.idProducto != other.idProducto) {
-            return false;
-        }
-        if (this.pvp != other.pvp) {
-            return false;
-        }
-        if (this.iva != other.iva) {
-            return false;
-        }
-        if (this.suvbencionada != other.suvbencionada) {
-            return false;
-        }
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.descripcion, other.descripcion)) {
-            return false;
-        }
-        if (!Objects.equals(this.caducidad, other.caducidad)) {
-            return false;
-        }
-        if (!Objects.equals(this.prooveedor, other.prooveedor)) {
-            return false;
-        }
-        return true;
-    }
 
     public int getIdProducto() {
         return idProducto;
@@ -136,11 +83,11 @@ public class Producto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public int getPvp() {
+    public float getPvp() {
         return pvp;
     }
 
-    public void setPvp(int pvp) {
+    public void setPvp(float pvp) {
         this.pvp = pvp;
     }
 
@@ -167,7 +114,58 @@ public class Producto implements Serializable {
     public void setProoveedor(Prooveedor prooveedor) {
         this.prooveedor = prooveedor;
     }
-    
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + this.idProducto;
+        hash = 29 * hash + Objects.hashCode(this.caducidad);
+        hash = 29 * hash + Objects.hashCode(this.nombre);
+        hash = 29 * hash + Objects.hashCode(this.descripcion);
+        hash = 29 * hash + Float.floatToIntBits(this.pvp);
+        hash = 29 * hash + this.iva;
+        hash = 29 * hash + (this.suvbencionada ? 1 : 0);
+        hash = 29 * hash + Objects.hashCode(this.prooveedor);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Producto other = (Producto) obj;
+        if (this.idProducto != other.idProducto) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.pvp) != Float.floatToIntBits(other.pvp)) {
+            return false;
+        }
+        if (this.iva != other.iva) {
+            return false;
+        }
+        if (this.suvbencionada != other.suvbencionada) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        if (!Objects.equals(this.caducidad, other.caducidad)) {
+            return false;
+        }
+        if (!Objects.equals(this.prooveedor, other.prooveedor)) {
+            return false;
+        }
+        return true;
+    }
+
 }

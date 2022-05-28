@@ -2,6 +2,7 @@ package controlador;
 
 import java.io.IOException;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -21,14 +22,22 @@ import modelo.Empleado;
 @Named
 @SessionScoped
 public class PlantillaController implements Serializable{
+    
+        private Empleado empleado;
+        
+        @PostConstruct
+        public void init(){
+            empleado = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("c");
+        }
+    
+        
         public void verificarYMostrar() throws IOException{
-        Empleado devuelve = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
        
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = request.getRequestURL().toString();
-        
+
         if(!url.contains("index")&& !url.contains("principal") && !url.contains("dispensacion")){
-            if((devuelve == null) || !url.contains(devuelve.getNombreUsuario().toLowerCase())){
+            if((empleado == null) || !url.contains(empleado.getNombreUsuario().toLowerCase())){
                 if(!url.contains("administrador")){
                     FacesContext.getCurrentInstance().getExternalContext().redirect("noPermiso.xhtml");                }
             }

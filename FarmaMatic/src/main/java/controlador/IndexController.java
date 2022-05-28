@@ -6,7 +6,9 @@
 package controlador;
 
 import EJB.EmpleadoFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -34,17 +36,17 @@ public class IndexController implements Serializable {
     }
     
     
-    public String verificarUsuario(){
+    public String verificarUsuario() throws IOException{
         Empleado empleadoB = new Empleado();
         
-        empleadoB =  empleadoEJB.verificarEmpleado(this.empleado);
+         empleadoB =  empleadoEJB.verificarEmpleado(this.empleado);
         if(empleadoB == null){
+
             return "noPermiso.xhtml";
         }else{
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleado", empleadoB);
-            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleado"));
-            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleado"));
-            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleado"));
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("c", empleadoB);
+            Map<String,Object> mapa = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
 
             return "privado/principal.xhtml";
         }

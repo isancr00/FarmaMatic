@@ -39,7 +39,9 @@ public class MenuController implements Serializable{
     
     public void obtenerMenu(){
         
-        Empleado devuelve = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("empleado");   
+        Empleado devuelve = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("c"); 
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("c",devuelve);
+
         
         if(devuelve != null){
             List<Menu> menus = menuEJB.obtenerMenusUsuario(devuelve);
@@ -56,7 +58,7 @@ public class MenuController implements Serializable{
     }
     
      public String destruirSesion(){  
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+       FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index.xhtml?faces-redirect=true";
     }
 
