@@ -8,7 +8,6 @@ package controlador;
 import EJB.MenuFacadeLocal;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -44,15 +43,23 @@ public class MenuController implements Serializable{
         
         Empleado devuelve = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("c"); 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("c",devuelve);
-
+        String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+        
         
         if(devuelve != null){
             List<Menu> menus = menuEJB.obtenerMenusUsuario(devuelve);
-
+            String url = "//localhost:8080/FarmaMatic/faces/privado/principal.xhtml;jsessionid="+sessionId;
+            DefaultMenuItem inicio = DefaultMenuItem.builder().value("Inicio").url(url).build();
+            inicio.setUrl(url);
+            modelo.getElements().add(inicio);     
+                
             for(int i = 0;i<menus.size();i++){
+                
                 Menu menu = menus.get(i);
-                DefaultMenuItem item = DefaultMenuItem.builder().value(menu.getNombre()).url(menu.getUrl()).build();
-                item.setUrl(menu.getUrl());
+                String url2 = "//localhost:8080/FarmaMatic/faces" + menu.getUrl()+";jsessionid=" + sessionId;
+         
+                DefaultMenuItem item = DefaultMenuItem.builder().value(menu.getNombre()).url(url2).build();
+                item.setUrl(url2);
                 modelo.getElements().add(item);     
             }
         }

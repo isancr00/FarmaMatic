@@ -23,15 +23,13 @@ import modelo.Empleado;
 public class PlantillaController implements Serializable{
             
         public void verificarYMostrar() throws IOException{
-        
-
         Empleado empleado = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("c");
             
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = request.getRequestURL().toString();
 
         if(!url.contains("index")&& !url.contains("principal") && !url.contains("dispensacion")){
-            if((empleado == null) || !url.contains(empleado.getNombreUsuario().toLowerCase())){
+            if((empleado == null) || !url.contains(empleado.getRol().getNombreRol().toLowerCase())){
                 if(!url.contains("administrador")){
                     FacesContext.getCurrentInstance().getExternalContext().redirect("noPermiso.xhtml");                }
             }
