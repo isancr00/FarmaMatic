@@ -2,9 +2,8 @@ package controlador;
 
 import java.io.IOException;
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import modelo.Empleado;
@@ -20,19 +19,14 @@ import modelo.Empleado;
  * @author sanch
  */
 @Named
-@SessionScoped
+@ViewScoped
 public class PlantillaController implements Serializable{
-    
-        private Empleado empleado;
-        
-        @PostConstruct
-        public void init(){
-            empleado = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("c");
-        }
-    
-        
+            
         public void verificarYMostrar() throws IOException{
-       
+        
+
+        Empleado empleado = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("c");
+            
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = request.getRequestURL().toString();
 

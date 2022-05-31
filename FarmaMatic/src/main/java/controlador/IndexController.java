@@ -37,17 +37,15 @@ public class IndexController implements Serializable {
     
     
     public String verificarUsuario() throws IOException{
-        Empleado empleadoB = new Empleado();
         
-         empleadoB =  empleadoEJB.verificarEmpleado(this.empleado);
+        Empleado empleadoB = new Empleado();
+        empleadoB =  empleadoEJB.verificarEmpleado(this.empleado);
+        
         if(empleadoB == null){
 
             return "noPermiso.xhtml";
         }else{
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("c", empleadoB);
-            Map<String,Object> mapa = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-
-
             return "privado/principal.xhtml";
         }
     }

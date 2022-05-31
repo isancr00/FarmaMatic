@@ -8,6 +8,8 @@ package controlador;
 import EJB.MenuFacadeLocal;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -23,6 +25,7 @@ import org.primefaces.model.menu.MenuModel;
  *
  * @author sanch
  */
+@ManagedBean
 @Named
 @SessionScoped
 public class MenuController implements Serializable{
@@ -53,13 +56,12 @@ public class MenuController implements Serializable{
                 modelo.getElements().add(item);     
             }
         }
-     
-        
+                
     }
     
      public String destruirSesion(){  
        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index.xhtml?faces-redirect=true";
+       return "/index.xhtml?faces-redirect=true";
     }
 
 

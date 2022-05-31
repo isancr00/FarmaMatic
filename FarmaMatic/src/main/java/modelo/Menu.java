@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
  *
  * @author sanch
  */
+@SessionScoped
 @Entity
 @Table(name = "menus")
 public class Menu implements Serializable{
