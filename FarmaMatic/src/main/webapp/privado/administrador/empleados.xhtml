@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/plantillaFarmacia.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form"> 
+                    <p>
+                        <h1 align="center">Lista de Empleados</h1>
+                    </p>
+                    <div class="card">
+                        <p:dataTable var="empleado" value="#{empleadosController.empleados}" id="datatable">
+                             <p:column headerText="Nombre">
+                                 <h:outputText value="#{empleado.nombreEmpleado}" />
+                            </p:column>
+
+                            <p:column headerText="Usuario">
+                                <h:outputText value="#{empleado.nombreUsuario}" />
+                            </p:column>
+                            
+                             <p:column headerText="Teléfono">
+                                 <h:outputText value="#{empleado.telefono}" />
+                            </p:column>
+                            
+                             <p:column headerText="Rol">
+                                 <h:outputText value="#{empleado.rol.nombreRol}" />
+                            </p:column>
+                            
+                                    
+                            <p:column headerText="Eliminar empleado">
+                                <p:commandButton value="Eliminar" icon="pi pi-trash" action="#{empleadosController.eliminarEmpleado(cliente)}"/>
+                            </p:column>
+                         
+                        </p:dataTable>
+                    </div>            
+                    <p:commandButton value="Añadir" icon="pi pi-plus-circle" ajax="false" action="#{empleadosController.add()}"/>            
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

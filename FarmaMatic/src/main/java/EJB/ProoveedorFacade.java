@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +29,20 @@ public class ProoveedorFacade extends AbstractFacade<Prooveedor> implements Proo
     public ProoveedorFacade() {
         super(Prooveedor.class);
     }
+
+    @Override
+    public Prooveedor getProvNombre(String nombreProveedor) {
+        List<Prooveedor> lista = this.findAll();
+        
+        for(int i=0;i<lista.size();i++){
+            if(lista.get(i).getNombre().equals(nombreProveedor)){
+                return lista.get(i);
+            }
+        }
+        
+        return null;
+    
+    }
+    
     
 }

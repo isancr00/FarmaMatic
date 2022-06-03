@@ -27,13 +27,36 @@ public class PlantillaController implements Serializable{
             
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = request.getRequestURL().toString();
-
-        if(!url.contains("index")&& !url.contains("principal") && !url.contains("dispensacion")){
-            if((empleado == null) || !url.contains(empleado.getRol().getNombreRol().toLowerCase())){
-                if(!url.contains("administrador")){
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("noPermiso.xhtml");                }
+        
+        if(empleado!=null){
+            if(!url.contains("index") && !url.contains("dispensacion") && !url.contains("liente")){
+                if(!url.contains(empleado.getRol().getNombreRol().toLowerCase())){
+                    if(!url.contains("administrador")){
+                        if(!url.equals("http://localhost:8080/FarmaMatic/faces/privado/productos.xhtml") && !url.equals("http://localhost:8080/FarmaMatic/faces/privado/addProducto.xhtml")){
+                            FacesContext.getCurrentInstance().getExternalContext().redirect("//localhost:8080/FarmaMatic/noPermiso.xhtml"); 
+                        }
+                    }
+                }
             }
+           
+        }else{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("//localhost:8080/FarmaMatic/noPermiso.xhtml");
         }
-    
+/*
+        if(!url.contains("index")&& !url.contains("principal") && !url.contains("dispensacion")){
+            if(!url.equals("http://localhost:8080/FarmaMatic/faces/privado/productos.xhtml")){
+                if((empleado == null) || !url.contains(empleado.getRol().getNombreRol().toLowerCase())){
+                    if(!url.contains("administrador")){
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("//localhost:8080/FarmaMatic/noPermiso.xhtml");                
+                    }
+                }
+            }else if((empleado == null) || !url.contains(empleado.getRol().getNombreRol().toLowerCase())){
+                if(!url.contains("administrador")){
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("//localhost:8080/FarmaMatic/noPermiso.xhtml");                
+                }
+            }
+            
+        }
+    */
     }
 }

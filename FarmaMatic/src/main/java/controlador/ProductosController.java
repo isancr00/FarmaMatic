@@ -6,13 +6,16 @@
 package controlador;
 
 import EJB.ProductoFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Producto;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -29,6 +32,15 @@ public class ProductosController implements Serializable{
     @PostConstruct
     public void init(){
         productos = productoEJB.findAll();
+    }
+    
+    public void eliminarProducto(Producto producto) throws IOException{
+        productoEJB.remove(producto);
+
+    }
+    
+    public String add(){
+        return "addProducto.xhtml";
     }
 
     public List<Producto> getProductos() {

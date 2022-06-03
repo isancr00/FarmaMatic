@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template/plantillaFarmacia.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form"> 
+                    <p>
+                        <h1 align="center">Lista de Productos</h1>
+                    </p>
+                    <div class="card">
+                        <p:dataTable var="producto" value="#{productosController.productos}" id="datatable">
+                             <p:column headerText="Nombre">
+                                 <h:outputText value="#{producto.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Descripción">
+                                <h:outputText value="#{producto.descripcion}" />
+                            </p:column>
+                            
+                            <p:column headerText="Caducidad">
+                                <h:outputText value="#{producto.caducidad}" />
+                            </p:column>
+                            
+                            <p:column headerText="PVP">
+                                <h:outputText value="#{producto.pvp}" />
+                            </p:column>
+                            
+                            <p:column headerText="IVA">
+                                <h:outputText value="#{producto.iva}%" />
+                            </p:column>
+                            
+                            <p:column headerText="Suvbencionado">
+                                <h:outputText value="#{producto.suvbencionada}" />
+                            </p:column>
+                                                        
+                            <p:column headerText="Eliminar producto">
+                                <p:commandButton value="Eliminar" icon="pi pi-trash" action="#{productosController.eliminarProducto(producto)}"/>
+                            </p:column>
+                         
+                        </p:dataTable>
+                    </div>            
+                    <p:commandButton value="Añadir" icon="pi pi-plus-circle" ajax="false" action="#{productosController.add()}"/>            
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

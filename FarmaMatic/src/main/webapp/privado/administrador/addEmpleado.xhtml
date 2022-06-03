@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template/plantillaFarmacia.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    
+                <p:panelGrid columns="3" layout="grid" styleClass="sjpwcase-text-align-center">
+                    <p:outputLabel value ="Nombre: "/>
+                    <p:inputText value="#{altaEmpleadoController.empleado.nombreEmpleado}" required="true" 
+                        requiredMessage="Nombre es un campo obligatorio"
+                        id="txtNombre"/>
+                    <p:message for="txtNombre"/>                  
+                    
+                    <p:outputLabel value ="Usuario: "/>
+                    <p:inputText value="#{altaEmpleadoController.empleado.nombreUsuario}" required="true" 
+                        requiredMessage="Usuario es un campo obligatorio"
+                        id="txtUsuario"/>
+                    <p:message for="txtUsuario"/> 
+                    
+                     <p:outputLabel value ="Contraseña: "/>
+                     <p:password value="#{altaEmpleadoController.empleado.contrasenia}" />
+                     <p></p>
+          
+                      <p:outputLabel value ="Teléfono: "/>
+                      <p:inputText value="#{altaEmpleadoController.empleado.telefono}" required="true" 
+                        requiredMessage="Tlf es un campo obligatorio"
+                        id="txtTlf"/>
+                    <p:message for="txtTlf"/> 
+                    
+                      <p:outputLabel value="Rol: "/>
+                      <h:selectOneListbox value="#{altaEmpleadoController.nombreRol}">
+                          <f:selectItems value="#{altaEmpleadoController.roles()}"/>           
+                    </h:selectOneListbox>
+                    
+                    
+                </p:panelGrid>
+                    <p:commandButton value="Registrar" actionListener="#{altaEmpleadoController.addEmpleado()}" update="@form"/> 
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

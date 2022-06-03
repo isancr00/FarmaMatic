@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template/plantillaFarmacia.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    
+                <p:panelGrid columns="3" layout="grid" styleClass="sjpwcase-text-align-center">
+                    <p:outputLabel value ="Nombre: "/>
+                    <p:inputText value="#{altaProductoController.producto.nombre}" required="true" 
+                        requiredMessage="Nombre es un campo obligatorio"
+                        id="txtNombre"/>
+                    <p:message for="txtNombre"/>                  
+                    
+                    <p:outputLabel value ="Fecha de caducidad:  "/>
+                    <p:calendar id="calendario" value="#{altaProductoController.producto.caducidad}" showOn="button" required="true" 
+                                requiredMessage="Fecha de caducidad es un campo obligatorio" locale="es"/>
+                    <p:message for="calendario"/>
+                    
+                    <p:outputLabel value ="Descripción:  "/>
+                    <p:inputText value="#{altaProductoController.producto.descripcion}" required="true" 
+                        requiredMessage="Descripción es un campo obligatorio"
+                        id="descripcion"/>
+                    <p:message for="descripcion"/> 
+                    
+                   <p:outputLabel value ="Precio  "/>
+                   <p:inputText value="#{altaProductoController.producto.pvp}" required="true" 
+                        requiredMessage="Precio es un campo obligatorio"
+                        id="precio"/>
+                    <p:message for="precio"/>                 
+                    
+                    <p:outputLabel value ="IVA:  "/>
+                    <p:inputText value="#{altaProductoController.producto.iva}" required="true" 
+                        requiredMessage="IVA es un campo obligatorio"
+                        id="iva"/>
+                    <p:message for="iva"/>    
+                    
+                    <p:outputLabel value ="Suvbencionada: "/>
+                    <p:selectOneMenu id="suvbencion" value="#{altaProductoController.producto.suvbencionada}">
+                        <f:selectItem itemLabel="True" itemValue="True"/>
+                        <f:selectItem itemLabel="False" itemValue="False"/>
+                    </p:selectOneMenu>
+                    <p:message for="suvbencion"/>    
+                    
+                    <p:outputLabel value="Proveedor: "/>
+                    <h:selectOneListbox value="#{altaProductoController.nombreProveedor}">
+                        <f:selectItems value="#{altaProductoController.proveedores()}"/>           
+                    </h:selectOneListbox>
+                    <p></p>
+                    
+                    <p:outputLabel value="Cantidad: "/>
+                    <p:inputText value="#{altaProductoController.cantidad}" required="true" 
+                        requiredMessage="Cantidad es un campo obligatorio"
+                        id="cantidad"/>
+                    <p:message for="cantidad"/>  
+                </p:panelGrid>
+                <p:commandButton value="Registrar" actionListener="#{altaProductoController.insertarProductos()}" update="@form"/> 
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

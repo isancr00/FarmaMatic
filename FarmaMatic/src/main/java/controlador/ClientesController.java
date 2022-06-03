@@ -22,13 +22,14 @@ import modelo.Cliente;
 @ViewScoped
 public class ClientesController implements Serializable{
     private List<Cliente> clientes;
-    
+    private Cliente cliente;
     @EJB
     private ClienteFacadeLocal clienteEJB;
     
     @PostConstruct
     public void init(){
         clientes = clienteEJB.findAll();
+        cliente=new Cliente();
     }
 
     public List<Cliente> getClientes() {
@@ -45,6 +46,14 @@ public class ClientesController implements Serializable{
 
     public void setClienteEJB(ClienteFacadeLocal clienteEJB) {
         this.clienteEJB = clienteEJB;
+    }
+    
+    public void eliminarCliente(Cliente cliente){
+        clienteEJB.remove(cliente);
+    }
+    
+    public String add(){
+        return "addCliente.xhtml";
     }
     
     

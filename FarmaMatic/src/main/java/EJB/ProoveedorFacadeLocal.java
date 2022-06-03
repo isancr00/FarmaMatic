@@ -29,5 +29,7 @@ public interface ProoveedorFacadeLocal {
     List<Prooveedor> findRange(int[] range);
 
     int count();
+
+    public Prooveedor getProvNombre(String nombreProveedor);
     
 }
