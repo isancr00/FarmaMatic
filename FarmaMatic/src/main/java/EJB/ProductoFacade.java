@@ -5,8 +5,6 @@
  */
 package EJB;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,5 +50,20 @@ public class ProductoFacade extends AbstractFacade<Producto> implements Producto
         }
         return tirar;
     }
+
+    @Override
+    public List<String> getListaNombres() {
+          ArrayList<String> nombres = new ArrayList<>();
+          List<Producto> prod = this.findAll();
+
+          for(int i=0;i<prod.size();i++){
+              nombres.add(prod.get(i).getNombre());
+          }
+
+
+          return nombres;
+    }
+
+    
     
 }

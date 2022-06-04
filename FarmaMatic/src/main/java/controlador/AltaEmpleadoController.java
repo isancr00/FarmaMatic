@@ -49,7 +49,7 @@ public class AltaEmpleadoController implements Serializable {
             empleado.setRol(rolEJB.findNombre(nombreRol));
             empleadoEJB.create(empleado);
         }catch(Exception e){
-            System.out.println("Error insertando empleado "+e.getMessage());
+            System.out.println("Error insertando empleado " + e.getMessage());
 
         }  
     }

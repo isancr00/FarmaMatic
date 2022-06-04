@@ -31,11 +31,7 @@ public class DetalleDeVenta implements Serializable {
     private int idDetalleVenta;
     
     @Column(name = "importe")
-    private int importe;
-    
-    @JoinColumn(name = "idVenta")
-    private Venta venta;
-    
+    private float importe;    
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "detalleVentaProd", joinColumns = @JoinColumn(name = "idVenta"), inverseJoinColumns = @JoinColumn(name = "idProducto"))
     private List<Producto> productos;
@@ -48,21 +44,14 @@ public class DetalleDeVenta implements Serializable {
         this.idDetalleVenta = idDetalleVenta;
     }
 
-    public int getImporte() {
+    public float getImporte() {
         return importe;
     }
 
-    public void setImporte(int importe) {
+    public void setImporte(float importe) {
         this.importe = importe;
     }
 
-    public Venta getVenta() {
-        return venta;
-    }
-
-    public void setVenta(Venta venta) {
-        this.venta = venta;
-    }
 
     public List<Producto> getProductos() {
         return productos;
@@ -74,11 +63,10 @@ public class DetalleDeVenta implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + this.idDetalleVenta;
-        hash = 79 * hash + this.importe;
-        hash = 79 * hash + Objects.hashCode(this.venta);
-        hash = 79 * hash + Objects.hashCode(this.productos);
+        int hash = 7;
+        hash = 13 * hash + this.idDetalleVenta;
+        hash = 13 * hash + Float.floatToIntBits(this.importe);
+        hash = 13 * hash + Objects.hashCode(this.productos);
         return hash;
     }
 
@@ -97,10 +85,7 @@ public class DetalleDeVenta implements Serializable {
         if (this.idDetalleVenta != other.idDetalleVenta) {
             return false;
         }
-        if (this.importe != other.importe) {
-            return false;
-        }
-        if (!Objects.equals(this.venta, other.venta)) {
+        if (Float.floatToIntBits(this.importe) != Float.floatToIntBits(other.importe)) {
             return false;
         }
         if (!Objects.equals(this.productos, other.productos)) {
@@ -108,5 +93,9 @@ public class DetalleDeVenta implements Serializable {
         }
         return true;
     }
+
+    
+    
+    
     
     }

@@ -40,6 +40,10 @@ public class Venta implements Serializable {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Cliente cliente;
 
+    @JoinColumn(name = "idDetalleVenta")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private DetalleDeVenta detVenta;
+
     public int getIdVenta() {
         return idVenta;
     }
@@ -72,13 +76,22 @@ public class Venta implements Serializable {
         this.cliente = cliente;
     }
 
+    public DetalleDeVenta getDetVenta() {
+        return detVenta;
+    }
+
+    public void setDetVenta(DetalleDeVenta detVenta) {
+        this.detVenta = detVenta;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + this.idVenta;
-        hash = 83 * hash + Objects.hashCode(this.fechaVenta);
-        hash = 83 * hash + Objects.hashCode(this.empleado);
-        hash = 83 * hash + Objects.hashCode(this.cliente);
+        int hash = 3;
+        hash = 89 * hash + this.idVenta;
+        hash = 89 * hash + Objects.hashCode(this.fechaVenta);
+        hash = 89 * hash + Objects.hashCode(this.empleado);
+        hash = 89 * hash + Objects.hashCode(this.cliente);
+        hash = 89 * hash + Objects.hashCode(this.detVenta);
         return hash;
     }
 
@@ -106,8 +119,12 @@ public class Venta implements Serializable {
         if (!Objects.equals(this.cliente, other.cliente)) {
             return false;
         }
+        if (!Objects.equals(this.detVenta, other.detVenta)) {
+            return false;
+        }
         return true;
     }
     
+   
     
 }

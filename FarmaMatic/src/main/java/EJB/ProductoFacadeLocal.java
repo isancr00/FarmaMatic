@@ -31,5 +31,7 @@ public interface ProductoFacadeLocal {
     int count();
 
     public List<Producto> productosCaducados();
-    
+
+    public List<String> getListaNombres();
+        
 }

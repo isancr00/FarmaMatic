@@ -1,14 +1,39 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
         <ui:composition template="./../WEB-INF/template/plantillaFarmacia.xhtml">
 
             <ui:define name="content">
-                dispensacion
+                <p align="center">Lista de Ventas</p>
+                <h:form>
+                    <div class="card">
+                        <p:dataTable var="venta" value="#{dispensacionController.ventas}">
+                             <p:column headerText="Fecha">
+                                 <h:outputText value="#{venta.fechaVenta}" />
+                            </p:column>
+
+                            <p:column headerText="Cliente">
+                                <h:outputText value="#{venta.cliente.nombreCliente}" />
+                            </p:column>
+                            
+                            <p:column headerText="Empleado">
+                                <h:outputText value="#{venta.empleado.nombreEmpleado}" />
+                            </p:column>
+                            
+                            <p:column headerText="Importe">
+                                <h:outputText value="#{dispensacionController.importeIdVenta(venta.idVenta)}" />
+                            </p:column>                     
+                            </p:dataTable>
+                    </div>
+                    <p:commandButton value="Añadir" icon="pi pi-plus-circle" ajax="false" action="#{dispensacionController.add()}"/>            
+
+                </h:form>
             </ui:define>
 
         </ui:composition>
