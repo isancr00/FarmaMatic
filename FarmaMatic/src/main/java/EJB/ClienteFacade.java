@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +29,20 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFac
     public ClienteFacade() {
         super(Cliente.class);
     }
+
+    @Override
+    public Cliente getClienteNombre(String nombre) {
+       List<Cliente> lista = this.findAll();
+       
+       for(int i=0;i<lista.size();i++){
+           if(lista.get(i).getNombreCliente().equals(nombre)){
+               return lista.get(i);
+           }
+       }
+       
+       return null;
+    }
+    
+    
     
 }

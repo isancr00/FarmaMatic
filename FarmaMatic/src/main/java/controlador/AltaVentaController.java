@@ -8,6 +8,7 @@ package controlador;
 import EJB.ClienteFacadeLocal;
 import EJB.DetalleDeVentaFacadeLocal;
 import EJB.ProductoFacadeLocal;
+import EJB.VentaFacadeLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,16 +39,19 @@ public class AltaVentaController implements Serializable{
     private List<Producto> seleccionados;
     
     private List<Producto> productos;
-    
+    private Cliente cliente;
     private DetalleDeVenta detalle;
+    private float importe;
 
     
     @EJB
     private ClienteFacadeLocal clienteEJB;
     
-     
     @EJB
     private ProductoFacadeLocal productoEJB;
+     
+    @EJB
+    private VentaFacadeLocal ventaEJB;
     
     @EJB
     private DetalleDeVentaFacadeLocal detalleDeVentaFacadeLocal;
@@ -58,6 +62,10 @@ public class AltaVentaController implements Serializable{
         clientes = clienteEJB.findAll();
         seleccionados = new ArrayList<>();
         productos = productoEJB.findAll();
+        cliente = new Cliente();
+        venta = new Venta();
+        detalle = new DetalleDeVenta();
+        importe = 0;
     }
 
     public List<String> clientes(){
@@ -72,13 +80,23 @@ public class AltaVentaController implements Serializable{
 
     public void add(){
         
-        venta.setFechaVenta(new Date());
+        cliente = clienteEJB.getClienteNombre(nombreCliente);
+        Date date = new Date();
+        venta.setFechaVenta(date);
         venta.setEmpleado(empleado);
+        detalle.setProductos(seleccionados);
+        for(int i=0;i<seleccionados.size();i++){
+            float iva = seleccionados.get(i).getIva()/100;
+            importe += seleccionados.get(i).getPvp()+(seleccionados.get(i).getPvp()*iva);
+            //productoEJB.remove(seleccionados.get(i));
+        }
         
-      
-        
-        
-        
+        importe = importe - (importe*(cliente.getCopago().getPorcentaje()/100));
+        detalle.setImporte(importe);
+        detalleDeVentaFacadeLocal.create(detalle);
+        venta.setDetVenta(detalle);
+ 
+        ventaEJB.create(venta);
     }
 
     public Empleado getEmpleado() {
@@ -160,6 +178,31 @@ public class AltaVentaController implements Serializable{
     public void setDetalleDeVentaFacadeLocal(DetalleDeVentaFacadeLocal detalleDeVentaFacadeLocal) {
         this.detalleDeVentaFacadeLocal = detalleDeVentaFacadeLocal;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public float getImporte() {
+        return importe;
+    }
+
+    public void setImporte(float importe) {
+        this.importe = importe;
+    }
+
+    public VentaFacadeLocal getVentaEJB() {
+        return ventaEJB;
+    }
+
+    public void setVentaEJB(VentaFacadeLocal ventaEJB) {
+        this.ventaEJB = ventaEJB;
+    }
+    
     
     
     

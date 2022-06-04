@@ -27,7 +27,9 @@ public interface ClienteFacadeLocal {
     List<Cliente> findAll();
 
     List<Cliente> findRange(int[] range);
-
+    
+    Cliente getClienteNombre(String nombre);
+    
     int count();
     
 }
