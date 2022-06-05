@@ -50,6 +50,10 @@ public class Producto implements Serializable {
     @JoinColumn(name = "idProoveedor")
     @OneToOne(cascade = CascadeType.PERSIST)
     private Prooveedor prooveedor;
+    
+     @JoinColumn(name = "idVenta")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Venta venta;
 
     public int getIdProducto() {
         return idProducto;
@@ -115,17 +119,26 @@ public class Producto implements Serializable {
         this.prooveedor = prooveedor;
     }
 
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.idProducto;
-        hash = 29 * hash + Objects.hashCode(this.caducidad);
-        hash = 29 * hash + Objects.hashCode(this.nombre);
-        hash = 29 * hash + Objects.hashCode(this.descripcion);
-        hash = 29 * hash + Float.floatToIntBits(this.pvp);
-        hash = 29 * hash + this.iva;
-        hash = 29 * hash + (this.suvbencionada ? 1 : 0);
-        hash = 29 * hash + Objects.hashCode(this.prooveedor);
+        int hash = 7;
+        hash = 41 * hash + this.idProducto;
+        hash = 41 * hash + Objects.hashCode(this.caducidad);
+        hash = 41 * hash + Objects.hashCode(this.nombre);
+        hash = 41 * hash + Objects.hashCode(this.descripcion);
+        hash = 41 * hash + Float.floatToIntBits(this.pvp);
+        hash = 41 * hash + this.iva;
+        hash = 41 * hash + (this.suvbencionada ? 1 : 0);
+        hash = 41 * hash + Objects.hashCode(this.prooveedor);
+        hash = 41 * hash + Objects.hashCode(this.venta);
         return hash;
     }
 
@@ -165,7 +178,11 @@ public class Producto implements Serializable {
         if (!Objects.equals(this.prooveedor, other.prooveedor)) {
             return false;
         }
+        if (!Objects.equals(this.venta, other.venta)) {
+            return false;
+        }
         return true;
     }
-
+    
+    
 }

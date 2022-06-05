@@ -64,6 +64,24 @@ public class ProductoFacade extends AbstractFacade<Producto> implements Producto
           return nombres;
     }
 
+    @Override
+    public List<Producto> findVender() {
+        
+        
+        List<Producto> prod = this.findAll();
+        List<Producto> vender = new ArrayList<>();
+
+
+          for(int i=0;i<prod.size();i++){
+              if(prod.get(i).getVenta()==null){
+                  vender.add(prod.get(i));
+              }
+
+          }
+          
+          return vender;
+    }
+
     
     
 }

@@ -32,6 +32,9 @@ public class Venta implements Serializable {
     @Column(name = "fechaVenta")
     private Date fechaVenta;
     
+    @Column(name = "importe")
+    private float importe;
+    
     @JoinColumn(name = "idEmpleado")
     @OneToOne(cascade = CascadeType.PERSIST)
     private Empleado empleado;
@@ -39,10 +42,6 @@ public class Venta implements Serializable {
     @JoinColumn(name = "idCliente")
     @OneToOne(cascade = CascadeType.PERSIST)
     private Cliente cliente;
-
-    @JoinColumn(name = "idDetalleVenta")
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private DetalleDeVenta detVenta;
 
     public int getIdVenta() {
         return idVenta;
@@ -58,6 +57,14 @@ public class Venta implements Serializable {
 
     public void setFechaVenta(Date fechaVenta) {
         this.fechaVenta = fechaVenta;
+    }
+
+    public float getImporte() {
+        return importe;
+    }
+
+    public void setImporte(float importe) {
+        this.importe = importe;
     }
 
     public Empleado getEmpleado() {
@@ -76,22 +83,14 @@ public class Venta implements Serializable {
         this.cliente = cliente;
     }
 
-    public DetalleDeVenta getDetVenta() {
-        return detVenta;
-    }
-
-    public void setDetVenta(DetalleDeVenta detVenta) {
-        this.detVenta = detVenta;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 89 * hash + this.idVenta;
-        hash = 89 * hash + Objects.hashCode(this.fechaVenta);
-        hash = 89 * hash + Objects.hashCode(this.empleado);
-        hash = 89 * hash + Objects.hashCode(this.cliente);
-        hash = 89 * hash + Objects.hashCode(this.detVenta);
+        hash = 97 * hash + this.idVenta;
+        hash = 97 * hash + Objects.hashCode(this.fechaVenta);
+        hash = 97 * hash + Float.floatToIntBits(this.importe);
+        hash = 97 * hash + Objects.hashCode(this.empleado);
+        hash = 97 * hash + Objects.hashCode(this.cliente);
         return hash;
     }
 
@@ -110,6 +109,9 @@ public class Venta implements Serializable {
         if (this.idVenta != other.idVenta) {
             return false;
         }
+        if (Float.floatToIntBits(this.importe) != Float.floatToIntBits(other.importe)) {
+            return false;
+        }
         if (!Objects.equals(this.fechaVenta, other.fechaVenta)) {
             return false;
         }
@@ -119,12 +121,8 @@ public class Venta implements Serializable {
         if (!Objects.equals(this.cliente, other.cliente)) {
             return false;
         }
-        if (!Objects.equals(this.detVenta, other.detVenta)) {
-            return false;
-        }
         return true;
     }
     
    
-    
 }

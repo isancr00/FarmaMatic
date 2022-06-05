@@ -5,7 +5,6 @@
  */
 package controlador;
 
-import EJB.DetalleDeVentaFacadeLocal;
 import EJB.VentaFacadeLocal;
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +12,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import modelo.DetalleDeVenta;
 import modelo.Venta;
 
 /**
@@ -25,11 +23,7 @@ import modelo.Venta;
 public class DispensacionController implements Serializable{
     
     @EJB
-    private VentaFacadeLocal ventaEJB;
-    
-    @EJB
-    private DetalleDeVentaFacadeLocal detalleVentaEJB;
-    
+    private VentaFacadeLocal ventaEJB;    
     private List<Venta> ventas;
     
     @PostConstruct
@@ -52,24 +46,7 @@ public class DispensacionController implements Serializable{
     public void setVentas(List<Venta> ventas) {
         this.ventas = ventas;
     }
-    
-    
-    
-    public float importeIdVenta(int idVenta){
-        float importe = 0;
         
-        for(int i=0;i<ventas.size();i++){
-            
-            if(ventas.get(i).getIdVenta() == idVenta){
-                return ventas.get(i).getDetVenta().getImporte();
-            }
-        }
-        
-        
-        return importe;
-        
-    }
-    
     public String add(){
         return "addVenta.xhtml";
     }

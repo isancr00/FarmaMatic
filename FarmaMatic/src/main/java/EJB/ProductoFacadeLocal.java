@@ -33,5 +33,7 @@ public interface ProductoFacadeLocal {
     public List<Producto> productosCaducados();
 
     public List<String> getListaNombres();
+
+    public List<Producto> findVender();
         
 }

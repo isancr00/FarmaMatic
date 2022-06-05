@@ -6,7 +6,6 @@
 package controlador;
 
 import EJB.ClienteFacadeLocal;
-import EJB.DetalleDeVentaFacadeLocal;
 import EJB.ProductoFacadeLocal;
 import EJB.VentaFacadeLocal;
 import java.io.Serializable;
@@ -19,7 +18,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Cliente;
-import modelo.DetalleDeVenta;
 import modelo.Empleado;
 import modelo.Producto;
 import modelo.Venta;
@@ -40,7 +38,6 @@ public class AltaVentaController implements Serializable{
     
     private List<Producto> productos;
     private Cliente cliente;
-    private DetalleDeVenta detalle;
     private float importe;
 
     
@@ -53,18 +50,15 @@ public class AltaVentaController implements Serializable{
     @EJB
     private VentaFacadeLocal ventaEJB;
     
-    @EJB
-    private DetalleDeVentaFacadeLocal detalleDeVentaFacadeLocal;
     
     @PostConstruct
     public void init(){
         empleado = (Empleado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("c"); 
         clientes = clienteEJB.findAll();
         seleccionados = new ArrayList<>();
-        productos = productoEJB.findAll();
+        productos = productoEJB.findVender();
         cliente = new Cliente();
         venta = new Venta();
-        detalle = new DetalleDeVenta();
         importe = 0;
     }
 
@@ -81,10 +75,10 @@ public class AltaVentaController implements Serializable{
     public void add(){
         
         cliente = clienteEJB.getClienteNombre(nombreCliente);
+        venta.setCliente(cliente);
         Date date = new Date();
         venta.setFechaVenta(date);
         venta.setEmpleado(empleado);
-        detalle.setProductos(seleccionados);
         for(int i=0;i<seleccionados.size();i++){
             float iva = seleccionados.get(i).getIva()/100;
             importe += seleccionados.get(i).getPvp()+(seleccionados.get(i).getPvp()*iva);
@@ -92,11 +86,13 @@ public class AltaVentaController implements Serializable{
         }
         
         importe = importe - (importe*(cliente.getCopago().getPorcentaje()/100));
-        detalle.setImporte(importe);
-        detalleDeVentaFacadeLocal.create(detalle);
-        venta.setDetVenta(detalle);
- 
+        venta.setImporte(importe);
         ventaEJB.create(venta);
+        
+        for(int i=0;i<seleccionados.size();i++){
+            seleccionados.get(i).setVenta(venta);
+        }
+        
     }
 
     public Empleado getEmpleado() {
@@ -147,12 +143,20 @@ public class AltaVentaController implements Serializable{
         this.productos = productos;
     }
 
-    public DetalleDeVenta getDetalle() {
-        return detalle;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setDetalle(DetalleDeVenta detalle) {
-        this.detalle = detalle;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public float getImporte() {
+        return importe;
+    }
+
+    public void setImporte(float importe) {
+        this.importe = importe;
     }
 
     public ClienteFacadeLocal getClienteEJB() {
@@ -171,30 +175,6 @@ public class AltaVentaController implements Serializable{
         this.productoEJB = productoEJB;
     }
 
-    public DetalleDeVentaFacadeLocal getDetalleDeVentaFacadeLocal() {
-        return detalleDeVentaFacadeLocal;
-    }
-
-    public void setDetalleDeVentaFacadeLocal(DetalleDeVentaFacadeLocal detalleDeVentaFacadeLocal) {
-        this.detalleDeVentaFacadeLocal = detalleDeVentaFacadeLocal;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public float getImporte() {
-        return importe;
-    }
-
-    public void setImporte(float importe) {
-        this.importe = importe;
-    }
-
     public VentaFacadeLocal getVentaEJB() {
         return ventaEJB;
     }
@@ -202,7 +182,6 @@ public class AltaVentaController implements Serializable{
     public void setVentaEJB(VentaFacadeLocal ventaEJB) {
         this.ventaEJB = ventaEJB;
     }
-    
     
     
     
