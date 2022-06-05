@@ -40,7 +40,7 @@ public class PlantillaController implements Serializable{
             }
            
         }else{
-            FacesContext.getCurrentInstance().getExternalContext().redirect("//localhost:8080/FarmaMatic/noPermiso.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("//localhost:8080/FarmaMatic/errorLogin.xhtml");
         }
 /*
         if(!url.contains("index")&& !url.contains("principal") && !url.contains("dispensacion")){

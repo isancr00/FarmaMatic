@@ -43,7 +43,7 @@ public class IndexController implements Serializable {
         
         if(empleadoB == null){
 
-            return "noPermiso.xhtml";
+            return "errorLogin.xhtml";
         }else{
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("c", empleadoB);
             return "privado/principal.xhtml";
