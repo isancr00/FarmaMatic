@@ -29,7 +29,7 @@ public class PlantillaController implements Serializable{
         String url = request.getRequestURL().toString();
         
         if(empleado!=null){
-            if(!url.contains("index") && !url.contains("dispensacion") && !url.contains("liente")){
+            if(!url.contains("principal") && !url.contains("index") && !url.contains("dispensacion") && !url.contains("liente")){
                 if(!url.contains(empleado.getRol().getNombreRol().toLowerCase())){
                     if(!url.contains("administrador")){
                         if(!url.equals("http://localhost:8080/FarmaMatic/faces/privado/productos.xhtml") && !url.equals("http://localhost:8080/FarmaMatic/faces/privado/addProducto.xhtml")){
