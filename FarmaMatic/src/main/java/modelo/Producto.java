@@ -48,11 +48,11 @@ public class Producto implements Serializable {
     private boolean suvbencionada;
     
     @JoinColumn(name = "idProoveedor")
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Prooveedor prooveedor;
     
      @JoinColumn(name = "idVenta")
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Venta venta;
 
     public int getIdProducto() {

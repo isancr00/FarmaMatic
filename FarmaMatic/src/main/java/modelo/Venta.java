@@ -36,11 +36,11 @@ public class Venta implements Serializable {
     private float importe;
     
     @JoinColumn(name = "idEmpleado")
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Empleado empleado;
     
     @JoinColumn(name = "idCliente")
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Cliente cliente;
 
     public int getIdVenta() {

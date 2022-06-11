@@ -32,7 +32,7 @@ public class Cliente implements Serializable {
     private String nombreCliente;
     
     @JoinColumn(name = "idCopago")
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Copago copago;
 
     public int getIdCliente() {

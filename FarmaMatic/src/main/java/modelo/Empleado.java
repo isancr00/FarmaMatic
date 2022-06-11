@@ -41,7 +41,7 @@ public class Empleado implements Serializable {
     private int telefono;
     
     @JoinColumn(name = "idRol")
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Rol rol;
 
     public int getIdEmpleado() {
