@@ -28,8 +28,14 @@
                             
                             <p:column headerText="Importe">
                                 <h:outputText value="#{venta.importe}" />
-                            </p:column>                     
-                            </p:dataTable>
+                            </p:column>
+                            
+                             <p:column headerText="Detalle de venta">
+                                <p:commandButton icon="pi pi-info" action="#{clientesController.eliminarCliente(cliente)}"/>
+
+                            </p:column>
+                            
+                        </p:dataTable>
                     </div>
                     <p:commandButton value="Añadir" icon="pi pi-plus-circle" ajax="false" action="#{dispensacionController.add()}"/>            
 

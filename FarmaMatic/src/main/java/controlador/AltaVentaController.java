@@ -90,7 +90,7 @@ public class AltaVentaController implements Serializable{
         ventaEJB.create(venta);
         
         for(int i=0;i<seleccionados.size();i++){
-            seleccionados.get(i).setVenta(venta);
+            productoEJB.vender(seleccionados.get(i),venta);
         }
         
     }

@@ -12,6 +12,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Producto;
+import modelo.Venta;
 
 /**
  *
@@ -43,7 +44,7 @@ public class ProductoFacade extends AbstractFacade<Producto> implements Producto
             Date hoy = new Date();
             Date caducidad = listaDeProductos.get(i).getCaducidad();
             
-            if(caducidad.before(hoy)){
+            if(caducidad.before(hoy) && (listaDeProductos.get(i).getVenta() != null)){
                 tirar.add(listaDeProductos.get(i));
             }
             
@@ -80,6 +81,35 @@ public class ProductoFacade extends AbstractFacade<Producto> implements Producto
           }
           
           return vender;
+    }
+
+    @Override
+    public void vender(Producto producto,Venta venta) {
+        List<Producto> prod = this.findAll();
+        
+        for(int i=0;i<prod.size();i++){
+            if(prod.get(i).equals(producto)){
+                prod.get(i).setVenta(venta);
+            }
+        }
+        
+        
+        
+    }
+
+    @Override
+    public List<Producto> findNoVendidos() {
+        List<Producto> prod = this.findAll();
+        List<Producto> noVendidos = new ArrayList<>();
+
+        
+        for(int i=0;i<prod.size();i++){
+            if(prod.get(i).getVenta() != null){
+                noVendidos.add(prod.get(i));
+            }
+        }
+        
+        return noVendidos;
     }
 
     

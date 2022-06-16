@@ -8,6 +8,7 @@ package EJB;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Producto;
+import modelo.Venta;
 
 /**
  *
@@ -35,5 +36,9 @@ public interface ProductoFacadeLocal {
     public List<String> getListaNombres();
 
     public List<Producto> findVender();
+
+    public void vender(Producto producto, Venta venta);
+
+    public List<Producto> findNoVendidos();
         
 }
