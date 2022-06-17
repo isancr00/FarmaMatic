@@ -40,7 +40,23 @@ public class ProductosController implements Serializable{
     public String add(){
         return "addProducto.xhtml";
     }
-
+    
+    public float calcularIVA(Producto producto){
+        float iva = 0;
+        
+        iva = (producto.getPvp()*producto.getIva())/100;
+        
+        return iva;
+    }
+    
+     public float calcularPVP(Producto producto){
+        float pvp = 0;
+        
+        pvp = this.calcularIVA(producto) + producto.getPvp();
+        
+        return pvp;
+    }
+    
     public List<Producto> getProductos() {
         return productos;
     }
