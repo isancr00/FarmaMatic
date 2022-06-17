@@ -104,7 +104,7 @@ public class ProductoFacade extends AbstractFacade<Producto> implements Producto
 
         
         for(int i=0;i<prod.size();i++){
-            if(prod.get(i).getVenta() != null){
+            if(prod.get(i).getVenta() == null){
                 noVendidos.add(prod.get(i));
             }
         }

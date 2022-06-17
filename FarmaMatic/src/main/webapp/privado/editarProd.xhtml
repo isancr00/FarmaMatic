@@ -1,14 +1,52 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
 
     <body>
 
         <ui:composition template="./../WEB-INF/template/plantillaFarmacia.xhtml">
 
             <ui:define name="content">
-                editar Producto
+                <h:form>
+
+                <p:panelGrid columns="2" layout="grid" styleClass="sjpwcase-text-align-center">
+                    <p:outputLabel value ="ID: "/>
+                    <p:outputLabel value="#{editProductoController.producto.idProducto}"/>
+
+                    <p:outputLabel value ="Nombre: "/>
+                    <p:outputLabel value="#{editProductoController.producto.nombre}"/>
+
+                    <p:outputLabel value ="Fecha de caducidad:  "/>
+                    <p:calendar id="calendario" value="#{editProductoController.fecha}"/>
+                    
+                     <p:outputLabel value ="Descripción:  "/>
+                     <p:inputText value="#{editProductoController.descripcion}"/>
+                     
+                      <p:outputLabel value ="Precio  "/>
+                      <p:inputText value="#{editProductoController.precioBase}"/>                 
+                    
+                    <p:outputLabel value ="IVA:  "/>
+                    <p:inputText value="#{editProductoController.iva}"/>    
+                    
+                    <p:outputLabel value ="Suvbencionada: "/>
+                    <p:selectOneMenu id="suvbencion" value="#{editProductoController.subvencion}">
+                        <f:selectItem itemLabel="True" itemValue="True"/>
+                        <f:selectItem itemLabel="False" itemValue="False"/>
+                    </p:selectOneMenu>         
+                    
+                    <p:outputLabel value="Proveedor: "/>
+                    <h:selectOneListbox value="#{editProductoController.nombreP}">
+                        <f:selectItems value="#{editProductoController.proveedores()}"/>           
+                    </h:selectOneListbox>
+                    
+                </p:panelGrid>
+                <p:commandButton value="Aplicar" actionListener="#{editProductoController.editar()}" update="@form"/> 
+                </h:form>
             </ui:define>
 
         </ui:composition>
