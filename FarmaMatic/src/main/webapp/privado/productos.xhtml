@@ -44,10 +44,13 @@
                                 <h:outputText value="#{producto.suvbencionada}" />
                             </p:column>
                                                       
-                            <p:column headerText="Eliminar producto">
-                                <p:commandButton value="Eliminar" icon="pi pi-trash" action="#{productosController.eliminarProducto(producto)}"/>
+                            <p:column headerText="Eliminar">
+                                <p:commandButton icon="pi pi-trash" action="#{productosController.eliminarProducto(producto)}"/>
                             </p:column>
-                         
+                            
+                            <p:column headerText="Editar">
+                                <p:commandButton  icon="pi pi-pencil" ajax="false" action="#{productosController.editarProducto(producto)}"/>
+                            </p:column>
                         </p:dataTable>
                     </div>            
                     <p:commandButton value="Añadir" icon="pi pi-plus-circle" ajax="false" action="#{productosController.add()}"/>            

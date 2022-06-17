@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Producto;
@@ -39,6 +40,12 @@ public class ProductosController implements Serializable{
     
     public String add(){
         return "addProducto.xhtml";
+    }
+    
+    public String editarProducto(Producto producto){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("editar", producto);
+
+        return "editarProd.xhtml";
     }
     
     public float calcularIVA(Producto producto){
