@@ -31,7 +31,11 @@
                       <p:inputText value="#{editProductoController.precioBase}"/>                 
                     
                     <p:outputLabel value ="IVA:  "/>
-                    <p:inputText value="#{editProductoController.iva}"/>    
+                    <p:selectOneMenu id="iva" value="#{editProductoController.producto.iva}">
+                        <f:selectItem itemLabel="21%" itemValue="21"/>
+                        <f:selectItem itemLabel="10%" itemValue="10"/>
+                        <f:selectItem itemLabel="4%" itemValue="4"/>
+                    </p:selectOneMenu>        
                     
                     <p:outputLabel value ="Suvbencionada: "/>
                     <p:selectOneMenu id="suvbencion" value="#{editProductoController.subvencion}">

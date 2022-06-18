@@ -24,7 +24,7 @@
                             </p:column>
                             
                             <p:column headerText="Eliminar">
-                                <p:commandButton icon="pi pi-trash" action="#{productosController.eliminarProducto(producto)}"/>
+                                <p:commandButton icon="pi pi-trash" actionListener="#{productosController.eliminarProducto(producto)}"/>
                             </p:column>
 
                         </p:dataTable>
