@@ -11,7 +11,7 @@
         <ui:composition template="./../WEB-INF/template/plantillaFarmacia.xhtml">
 
             <ui:define name="content">
-                <p align="center">ESTOS SON LOS PRODUCTOS QUE SE DEBEN RETIRAR DE STOCK</p>
+                        <h1 align="center">ESTOS SON LOS PRODUCTOS QUE DEBEN RETIRARSE DE STOCK</h1>
                 <h:form>
                     <div class="card">
                         <p:dataTable var="product" value="#{principalController.productosCaducados}">
@@ -21,6 +21,10 @@
 
                             <p:column headerText="Descripción">
                                 <h:outputText value="#{product.descripcion}" />
+                            </p:column>
+                            
+                            <p:column headerText="Eliminar">
+                                <p:commandButton icon="pi pi-trash" action="#{productosController.eliminarProducto(producto)}"/>
                             </p:column>
 
                         </p:dataTable>

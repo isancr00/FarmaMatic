@@ -27,15 +27,15 @@
                             </p:column>
                             
                             <p:column headerText="Precio base">
-                                <h:outputText value="#{producto.pvp}" />
+                                <h:outputText value="#{producto.pvp}€" />
                             </p:column>
                             
                             <p:column headerText="IVA">
-                                <h:outputText value="#{productosController.calcularIVA(producto)}" />
+                                <h:outputText value="#{productosController.calcularIVA(producto)}€" />
                             </p:column>
                             
                             <p:column headerText="PVP">
-                                <h:outputText value="#{productosController.calcularPVP(producto)}" />
+                                <h:outputText value="#{productosController.calcularPVP(producto)}€" />
                             </p:column>
                             
                             <p:column headerText="Suvbencionado">
