@@ -3,14 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Credenciales incorrectas</title>
+    </h:head>
+    <h:body>
+         <h:form>
+            <div align="center" style="position: fixed; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+                <p:panel header="Inicio de Sesión" style="width:500px">
+                    <p:commandButton value="Volver" ajax="false" action="#{menuController.destruirSesion()}"/>            
 
-    <body>
-          <p>CREDENCIALES INCORRECTAS</p>
-          <h:form>
-              <p:commandButton value="Cerrar Sesión" action="#{menuController.destruirSesion()}"/>
-
-              
-          </h:form>
-
-    </body>
+                </p:panel>
+            </div>
+        </h:form>
+    </h:body>
 </html>
+
