@@ -40,7 +40,11 @@
                             
                             <p:column headerText="Suvbencionado">
                                 <h:outputText value="#{producto.suvbencionada}" />
-                            </p:column>               
+                            </p:column>      
+                            
+                               <p:column headerText="Proveedor">
+                                <h:outputText value="#{producto.prooveedor.nombre}" />
+                            </p:column>
                          
                         </p:dataTable>
                     </div>
