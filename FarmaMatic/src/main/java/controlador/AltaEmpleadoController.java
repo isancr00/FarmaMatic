@@ -7,11 +7,13 @@ package controlador;
 
 import EJB.EmpleadoFacadeLocal;
 import EJB.RolFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Empleado;
@@ -44,14 +46,18 @@ public class AltaEmpleadoController implements Serializable {
     
     
     
-    public void addEmpleado(){
+    public void addEmpleado() throws IOException{
       try{
             empleado.setRol(rolEJB.findNombre(nombreRol));
             empleadoEJB.create(empleado);
         }catch(Exception e){
             System.out.println("Error insertando empleado " + e.getMessage());
-
         }  
+      
+        String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+      
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/administrador/empleados.xhtml;jsessionid="+sessionId); 
+
     }
     
        

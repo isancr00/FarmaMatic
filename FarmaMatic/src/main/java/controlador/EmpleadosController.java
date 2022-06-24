@@ -6,10 +6,12 @@
 package controlador;
 
 import EJB.EmpleadoFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Empleado;
@@ -48,8 +50,13 @@ public class EmpleadosController implements Serializable{
         this.empleadoEJB = empleadoEJB;
     }
      
-    public void eliminarEmpleado(Empleado empleado){
+    public void eliminarEmpleado(Empleado empleado) throws IOException{
         empleadoEJB.remove(empleado);
+        
+        String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+      
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/administrador/empleados.xhtml;jsessionid="+sessionId); 
+
     }
     
      public String add(){

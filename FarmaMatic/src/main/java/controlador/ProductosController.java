@@ -35,6 +35,11 @@ public class ProductosController implements Serializable{
     
     public void eliminarProducto(Producto producto) throws IOException{
         productoEJB.remove(producto);
+        
+        String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+      
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/productos.xhtml;jsessionid="+sessionId); 
+
 
     }
     

@@ -7,11 +7,13 @@ package controlador;
 
 import EJB.ClienteFacadeLocal;
 import EJB.CopagoFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Cliente;
@@ -44,14 +46,18 @@ public class AltaClienteController implements Serializable {
     
     
     
-    public void addCliente(){
+    public void addCliente() throws IOException{
       try{
             cliente.setCopago(copagoEJB.findPorcentaje(Integer.parseInt(porcentaje)));
             clienteEJB.create(cliente);
         }catch(Exception e){
             System.out.println("Error insertando cliente "+e.getMessage());
-
         }  
+      
+        String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+      
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/clientes.xhtml;jsessionid="+sessionId); 
+
     }
     
        

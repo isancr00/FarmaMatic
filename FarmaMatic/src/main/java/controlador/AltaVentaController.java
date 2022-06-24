@@ -8,6 +8,7 @@ package controlador;
 import EJB.ClienteFacadeLocal;
 import EJB.ProductoFacadeLocal;
 import EJB.VentaFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,7 +73,7 @@ public class AltaVentaController implements Serializable{
         return nombres;
     }
 
-    public void add(){
+    public void add() throws IOException{
         
         cliente = clienteEJB.getClienteNombre(nombreCliente);
         venta.setCliente(cliente);
@@ -92,6 +93,11 @@ public class AltaVentaController implements Serializable{
         for(int i=0;i<seleccionados.size();i++){
             productoEJB.vender(seleccionados.get(i),venta);
         }
+        
+          String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+      
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/dispensacion.xhtml;jsessionid="+sessionId); 
+
         
     }
 

@@ -7,6 +7,7 @@ package controlador;
 
 import EJB.ProductoFacadeLocal;
 import EJB.ProoveedorFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,7 +54,7 @@ public class EditProductoController implements Serializable{
     } 
     
     
-    public void editar(){
+    public void editar() throws IOException{
        proveedor = proveedoorEJB.getProvNombre(nombreP);
        producto.setDescripcion(descripcion);
        producto.setIva(iva);
@@ -63,7 +64,10 @@ public class EditProductoController implements Serializable{
        producto.setCaducidad(fecha);
        productoEJB.edit(producto);
 
-   
+         String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+      
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/productos.xhtml;jsessionid="+sessionId); 
+
     }
 
     public Producto getProducto() {

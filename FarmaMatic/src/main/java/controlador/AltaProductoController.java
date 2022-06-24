@@ -7,11 +7,13 @@ package controlador;
 
 import EJB.ProductoFacadeLocal;
 import EJB.ProoveedorFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Producto;
@@ -45,7 +47,7 @@ public class AltaProductoController implements Serializable {
     }  
     
     
-    public void insertarProductos(){
+    public void insertarProductos() throws IOException{
         try{
             proveedor = proveedorEJB.getProvNombre(nombreProveedor);
             producto.setProoveedor(proveedor);
@@ -53,11 +55,15 @@ public class AltaProductoController implements Serializable {
             for(int i=0;i<cantidad;i++){
                 productoEJB.create(producto);
 
-            }
-            
+            }  
         }catch (Exception e){
             System.out.println("Error insertando producto "+e.getMessage());
         }
+        
+        String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+      
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/productos.xhtml;jsessionid="+sessionId); 
+
     }
     
     public List<String> proveedores(){
