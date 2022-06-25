@@ -80,10 +80,16 @@ public class AltaVentaController implements Serializable{
         Date date = new Date();
         venta.setFechaVenta(date);
         venta.setEmpleado(empleado);
+
         for(int i=0;i<seleccionados.size();i++){
-            float iva = seleccionados.get(i).getIva()/100;
-            importe += seleccionados.get(i).getPvp()+(seleccionados.get(i).getPvp()*iva);
-            //productoEJB.remove(seleccionados.get(i));
+            float actual = 0;
+            actual += seleccionados.get(i).getPvp();
+            actual += (seleccionados.get(i).getPvp()*seleccionados.get(i).getIva())/100; 
+            if(seleccionados.get(i).isSuvbencionada()){
+                actual -= actual*cliente.getCopago().getPorcentaje()/100; 
+            }
+            
+            importe += actual;
         }
         
         importe = importe - (importe*(cliente.getCopago().getPorcentaje()/100));

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template/plantillaFarmacia.xhtml">
+
+            <ui:define name="content">
+                <h1 align="center">Lista de productos de la venta</h1>
+
+                <h:form>
+                            <p:dataTable var="producto" value="#{detalleVentaController.prod()}" >
+                               <p:column headerText="Nombre">
+                                     <h:outputText value="#{producto.nombre}" />
+                               </p:column>
+                               
+                                <p:column headerText="Descripción">
+                                    <h:outputText value="#{producto.descripcion}" />
+                                </p:column>
+                               
+                               <p:column headerText="Caducidad">
+                                <h:outputText value="#{producto.caducidad}">
+                                    <f:convertDateTime pattern="dd.MM.yyyy"/>                                
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Precio base">
+                                <h:outputText value="#{producto.pvp}€" />
+                            </p:column>
+                            
+                            <p:column headerText="IVA">
+                                <h:outputText value="#{productosController.calcularIVA(producto)}€" />
+                            </p:column>
+                            
+                            <p:column headerText="PVP">
+                                <h:outputText value="#{productosController.calcularPVP(producto)}€" />
+                            </p:column>
+                            
+                            <p:column headerText="Suvbencionado">
+                                <h:outputText value="#{producto.suvbencionada}" />
+                            </p:column>
+                                
+                            <p:column headerText="Precio tras copago">
+                                <h:outputText value="#{detalleVentaController.precioTrasCopago(producto,productosController.calcularPVP(producto))}" />
+                            </p:column>  
+                            
+                            <p:column headerText="Proveedor">
+                                <h:outputText value="#{producto.prooveedor.nombre}" />
+                            </p:column>
+                               
+                           </p:dataTable>
+                    
+                    <h:outputText value="Total: #{detalleVentaController.venta.importe}€" style="font-weight: bold"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

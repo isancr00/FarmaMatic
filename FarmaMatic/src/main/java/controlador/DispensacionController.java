@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Venta;
@@ -35,6 +36,13 @@ public class DispensacionController implements Serializable{
         return ventaEJB;
     }
 
+    
+    public String detalleVenta(Venta venta){
+        
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("venta",venta);
+        return "detalleVenta.xhtml";
+        
+    }
     public void setVentaEJB(VentaFacadeLocal ventaEJB) {
         this.ventaEJB = ventaEJB;
     }
