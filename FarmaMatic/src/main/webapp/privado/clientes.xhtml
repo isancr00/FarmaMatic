@@ -23,6 +23,10 @@
                             <p:column headerText="Copago">
                                 <h:outputText value="#{cliente.copago.porcentaje}%" />
                             </p:column>
+                            
+                             <p:column headerText="Editar">
+                                 <p:commandButton  icon="pi pi-pencil" ajax="false" action="#{clientesController.editarCliente(cliente)}"/>
+                            </p:column>
                                     
                             <p:column headerText="Eliminar cliente">
                                 <p:commandButton value="Eliminar" icon="pi pi-trash" action="#{clientesController.eliminarCliente(cliente)}"/>

@@ -6,10 +6,12 @@
 package controlador;
 
 import EJB.ClienteFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Cliente;
@@ -48,12 +50,22 @@ public class ClientesController implements Serializable{
         this.clienteEJB = clienteEJB;
     }
     
-    public void eliminarCliente(Cliente cliente){
+    public void eliminarCliente(Cliente cliente) throws IOException{
         clienteEJB.remove(cliente);
+         String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
+      
+        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/clientes.xhtml;jsessionid="+sessionId); 
+
     }
     
     public String add(){
         return "addCliente.xhtml";
+    }
+    
+    public String editarCliente(Cliente cliente){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("editarCli", cliente);
+
+        return "editarCli.xhtml";
     }
     
     

@@ -42,7 +42,7 @@ public class EditProductoController implements Serializable{
     @EJB
     private ProductoFacadeLocal productoEJB;
     
-        @EJB
+    @EJB
     private ProoveedorFacadeLocal proveedoorEJB;
         
     @PostConstruct

@@ -28,6 +28,8 @@ public interface CopagoFacadeLocal {
 
     List<Copago> findRange(int[] range);
     Copago findPorcentaje(int porcentaje);
+    
+    
 
     int count();
     
