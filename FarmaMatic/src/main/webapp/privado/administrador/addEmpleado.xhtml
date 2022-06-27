@@ -27,8 +27,10 @@
                     <p:message for="txtUsuario"/> 
                     
                      <p:outputLabel value ="Contraseña: "/>
-                     <p:password value="#{altaEmpleadoController.empleado.contrasenia}" />
-                     <p></p>
+                     <p:password value="#{altaEmpleadoController.empleado.contrasenia}" required="true"
+                                 requiredMessage="Contraseña es un campo obligatorio"
+                                 id="txtContra"/>
+                    <p:message for="txtContra"/> 
           
                       <p:outputLabel value ="Teléfono: "/>
                       <p:inputText value="#{altaEmpleadoController.empleado.telefono}" required="true" 
@@ -37,9 +39,9 @@
                     <p:message for="txtTlf"/> 
                     
                       <p:outputLabel value="Rol: "/>
-                      <h:selectOneListbox value="#{altaEmpleadoController.nombreRol}">
+                      <h:selectOneMenu value="#{altaEmpleadoController.nombreRol}">
                           <f:selectItems value="#{altaEmpleadoController.roles()}"/>           
-                    </h:selectOneListbox>
+                    </h:selectOneMenu>
                     
                     
                 </p:panelGrid>

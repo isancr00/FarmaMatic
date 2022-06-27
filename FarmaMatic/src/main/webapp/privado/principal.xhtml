@@ -14,17 +14,17 @@
                         <h1 align="center">ESTOS SON LOS PRODUCTOS QUE DEBEN RETIRARSE DE STOCK</h1>
                 <h:form>
                     <div class="card">
-                        <p:dataTable var="product" value="#{principalController.productosCaducados}">
+                        <p:dataTable var="producto" value="#{principalController.productosCaducados}">
                              <p:column headerText="Nombre">
-                                 <h:outputText value="#{product.nombre}" />
+                                 <h:outputText value="#{producto.nombre}" />
                             </p:column>
 
                             <p:column headerText="Descripción">
-                                <h:outputText value="#{product.descripcion}" />
+                                <h:outputText value="#{producto.descripcion}" />
                             </p:column>
                             
                             <p:column headerText="Eliminar">
-                                <p:commandButton icon="pi pi-trash" actionListener="#{productosController.eliminarProducto(producto)}"/>
+                                <p:commandButton icon="pi pi-trash" actionListener="#{productosController.eliminarProducto(producto,true)}"/>
                             </p:column>
 
                         </p:dataTable>

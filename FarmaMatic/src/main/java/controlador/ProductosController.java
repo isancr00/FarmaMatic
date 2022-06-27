@@ -35,12 +35,18 @@ public class ProductosController implements Serializable{
         productos = productoEJB.findNoVendidos();
     }
     
-    public void eliminarProducto(Producto producto) throws IOException{
+    public void eliminarProducto(Producto producto,boolean principal) throws IOException{
         productoEJB.remove(producto);
         
         String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
-      
-        FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/productos.xhtml;jsessionid="+sessionId); 
+        
+        if(principal == false){
+            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/productos.xhtml;jsessionid="+sessionId); 
+
+        }else{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/FarmaMatic/faces/privado/principal.xhtml;jsessionid="+sessionId); 
+
+        }
 
 
     }
