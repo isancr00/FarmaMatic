@@ -14,18 +14,20 @@
                 <p align="center">Lista de Ventas</p>
                 <h:form>
                     <div class="card">
-                        <p:dataTable var="venta" value="#{dispensacionController.ventas}">  
+                        <p:dataTable var="venta" value="#{dispensacionController.ventas}" widgetVar="ventaWidget"
+                                     filteredValue="#{dispensacionController.ventasFiltered}">  
+                            
                             <p:column headerText="Fecha">
                                 <h:outputText value="#{venta.fechaVenta}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>                                
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Cliente">
+                            <p:column headerText="Cliente" filterStyle="contains" filterBy="#{venta.cliente.nombreCliente}">
                                 <h:outputText value="#{venta.cliente.nombreCliente}" />
                             </p:column>
                             
-                            <p:column headerText="Empleado">
+                            <p:column headerText="Empleado" filterStyle="contains" filterBy="#{venta.empleado.nombreEmpleado}">
                                 <h:outputText value="#{venta.empleado.nombreEmpleado}" />
                             </p:column>
                             

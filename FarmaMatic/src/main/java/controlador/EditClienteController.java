@@ -29,7 +29,6 @@ import modelo.Copago;
 public class EditClienteController implements Serializable{
     
     private Cliente cliente;
-    private String nombre;
     private Copago copago;
     private int copagoNum;
     private List<Copago> copagos;
@@ -52,9 +51,11 @@ public class EditClienteController implements Serializable{
     }
     
     public void editar() throws IOException{
-        cliente.setNombreCliente(nombre);
         copago = copagoEJB.findPorcentaje(copagoNum);
-        cliente.setCopago(copago);
+        
+        if(copago != null){
+            cliente.setCopago(copago);
+        }
         
         clienteEJB.edit(cliente);
         
@@ -72,13 +73,6 @@ public class EditClienteController implements Serializable{
         this.cliente = cliente;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public Copago getCopago() {
         return copago;

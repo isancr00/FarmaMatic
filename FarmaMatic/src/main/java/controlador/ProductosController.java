@@ -24,6 +24,8 @@ import modelo.Producto;
 @ViewScoped
 public class ProductosController implements Serializable{
     private List<Producto> productos;
+    private List<Producto> productosFiltrar;
+
     
     @EJB
     private ProductoFacadeLocal productoEJB;
@@ -84,4 +86,14 @@ public class ProductosController implements Serializable{
     public void setProductoEJB(ProductoFacadeLocal productoEJB) {
         this.productoEJB = productoEJB;
     }
+
+    public List<Producto> getProductosFiltrar() {
+        return productosFiltrar;
+    }
+
+    public void setProductosFiltrar(List<Producto> productosFiltrar) {
+        this.productosFiltrar = productosFiltrar;
+    }
+    
+    
 }

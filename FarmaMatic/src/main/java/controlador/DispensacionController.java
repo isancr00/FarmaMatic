@@ -26,6 +26,8 @@ public class DispensacionController implements Serializable{
     @EJB
     private VentaFacadeLocal ventaEJB;    
     private List<Venta> ventas;
+    private List<Venta> ventasFiltered;
+
     
     @PostConstruct
     public void init(){
@@ -58,6 +60,13 @@ public class DispensacionController implements Serializable{
     public String add(){
         return "addVenta.xhtml";
     }
-    
-    
+
+    public List<Venta> getVentasFiltered() {
+        return ventasFiltered;
+    }
+
+    public void setVentasFiltered(List<Venta> ventasFiltered) {
+        this.ventasFiltered = ventasFiltered;
+    }
+       
 }

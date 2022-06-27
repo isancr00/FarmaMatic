@@ -10,7 +10,6 @@ import EJB.ProoveedorFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -28,17 +27,10 @@ import modelo.Prooveedor;
 @ViewScoped
 public class EditProductoController implements Serializable{
     private Producto producto;
-    private Date fecha;
-    private String descripcion;
-    private float precioBase;
-    private int iva;
-    private boolean subvencion;
     private Prooveedor proveedor;
     private String nombreP;
     private List<Prooveedor> proveedores;
 
-
-    
     @EJB
     private ProductoFacadeLocal productoEJB;
     
@@ -48,7 +40,6 @@ public class EditProductoController implements Serializable{
     @PostConstruct
     public void init(){
         producto = (Producto) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("editar");
-        fecha = new  Date();
         proveedor = new Prooveedor();
         proveedores = proveedoorEJB.findAll();
     } 
@@ -56,12 +47,10 @@ public class EditProductoController implements Serializable{
     
     public void editar() throws IOException{
        proveedor = proveedoorEJB.getProvNombre(nombreP);
-       producto.setDescripcion(descripcion);
-       producto.setIva(iva);
-       producto.setProoveedor(proveedor);
-       producto.setPvp(precioBase);
-       producto.setSuvbencionada(subvencion);
-       producto.setCaducidad(fecha);
+       if(proveedor != null){
+            producto.setProoveedor(proveedor);
+       }
+      
        productoEJB.edit(producto);
 
          String sessionId = FacesContext.getCurrentInstance().getExternalContext().getSessionId(true);
@@ -83,46 +72,6 @@ public class EditProductoController implements Serializable{
 
     public void setProductoEJB(ProductoFacadeLocal productoEJB) {
         this.productoEJB = productoEJB;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public float getPrecioBase() {
-        return precioBase;
-    }
-
-    public void setPrecioBase(float precioBase) {
-        this.precioBase = precioBase;
-    }
-
-    public int getIva() {
-        return iva;
-    }
-
-    public void setIva(int iva) {
-        this.iva = iva;
-    }
-
-    public boolean getSubvencion() {
-        return subvencion;
-    }
-
-    public void setSubvencion(boolean subvencion) {
-        this.subvencion = subvencion;
     }
 
     public Prooveedor getProveedor() {

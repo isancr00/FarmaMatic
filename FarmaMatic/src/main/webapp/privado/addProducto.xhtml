@@ -53,13 +53,9 @@
                     <p:message for="suvbencion"/>    
                     
                     <p:outputLabel value="Proveedor: "/>
-                    <p:selectOneMenu id="advanced" value="#{altaProductoController.nombreProveedor}"
-                                panelStyle="width:180px" var="c"
-                                filter="true" filterMatchMode="startsWith">
-
-                        <f:selectItems value="#{altaProductoController.proveedores}" var="prov"
-                                itemLabel="#{prov.nombre}" itemValue="#{prov}"/>
-                    </p:selectOneMenu>
+                     <h:selectOneMenu value="#{altaProductoController.nombreProveedor}">
+                        <f:selectItems value="#{altaProductoController.proveedores()}"/>           
+                    </h:selectOneMenu>
                     <p></p>
                     
                     <p:outputLabel value="Cantidad: "/>

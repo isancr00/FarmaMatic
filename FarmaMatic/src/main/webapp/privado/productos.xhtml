@@ -16,8 +16,10 @@
                         <h1 align="center">Lista de Productos</h1>
                     </p>
                     <div class="card">
-                        <p:dataTable var="producto" value="#{productosController.productos}" id="datatable">
-                             <p:column headerText="Nombre">
+                        <p:dataTable var="producto" value="#{productosController.productos}" id="datatable" widgetVar="productsWidget"
+                                     filteredValue="#{productosController.productosFiltrar}">
+                            
+                            <p:column headerText="Nombre" filterStyle="contains" filterBy="#{producto.nombre}">
                                  <h:outputText value="#{producto.nombre}" />
                             </p:column>
 

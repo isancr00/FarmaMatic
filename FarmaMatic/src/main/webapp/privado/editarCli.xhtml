@@ -15,12 +15,12 @@
                     <p:panelGrid columns="2" layout="grid" styleClass="sjpwcase-text-align-center">
                    
                     <p:outputLabel value ="Nombre: "/>
-                    <p:inputText value="#{editClienteController.nombre}"/>
+                    <p:inputText value="#{editClienteController.cliente.nombreCliente}"/>
                     
                     <p:outputLabel value="Copago: "/>
-                    <h:selectOneListbox value="#{editClienteController.copagoNum}">
+                    <h:selectOneMenu value="#{editClienteController.copagoNum}">
                         <f:selectItems value="#{editClienteController.copagos()}"/>           
-                    </h:selectOneListbox>
+                    </h:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton value="Aplicar" actionListener="#{editClienteController.editar()}" update="@form"/>
                 </h:form>

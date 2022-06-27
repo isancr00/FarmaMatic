@@ -22,13 +22,13 @@
                     <p:outputLabel value="#{editProductoController.producto.nombre}"/>
 
                     <p:outputLabel value ="Fecha de caducidad:  "/>
-                    <p:calendar id="calendario" value="#{editProductoController.fecha}"/>
+                    <p:calendar id="calendario" value="#{editProductoController.producto.caducidad}"/>
                     
                      <p:outputLabel value ="Descripción:  "/>
-                     <p:inputText value="#{editProductoController.descripcion}"/>
+                     <p:inputText value="#{editProductoController.producto.descripcion}"/>
                      
                       <p:outputLabel value ="Precio  "/>
-                      <p:inputText value="#{editProductoController.precioBase}"/>                 
+                      <p:inputText value="#{editProductoController.producto.pvp}"/>                 
                     
                     <p:outputLabel value ="IVA:  "/>
                     <p:selectOneMenu id="iva" value="#{editProductoController.producto.iva}">
@@ -38,15 +38,15 @@
                     </p:selectOneMenu>        
                     
                     <p:outputLabel value ="Suvbencionada: "/>
-                    <p:selectOneMenu id="suvbencion" value="#{editProductoController.subvencion}">
+                    <p:selectOneMenu id="suvbencion" value="#{editProductoController.producto.suvbencionada}">
                         <f:selectItem itemLabel="True" itemValue="True"/>
                         <f:selectItem itemLabel="False" itemValue="False"/>
                     </p:selectOneMenu>         
                     
                     <p:outputLabel value="Proveedor: "/>
-                    <h:selectOneListbox value="#{editProductoController.nombreP}">
+                    <h:selectOneMenu value="#{editProductoController.nombreP}">
                         <f:selectItems value="#{editProductoController.proveedores()}"/>           
-                    </h:selectOneListbox>
+                    </h:selectOneMenu>
                     
                 </p:panelGrid>
                 <p:commandButton value="Aplicar" actionListener="#{editProductoController.editar()}" update="@form"/> 

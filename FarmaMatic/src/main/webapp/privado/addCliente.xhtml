@@ -21,9 +21,11 @@
                     <p:message for="txtNombre"/>                  
                   
                     <p:outputLabel value="Copago: "/>
-                    <h:selectOneListbox value="#{altaClienteController.porcentaje}">
+                    <h:selectOneMenu value="#{altaClienteController.porcentaje}">
                         <f:selectItems value="#{altaClienteController.copagos()}"/>           
-                    </h:selectOneListbox>
+                    </h:selectOneMenu>
+                    
+                    <p></p>
                     
                 </p:panelGrid>
                     <p:commandButton value="Registrar" action="#{altaClienteController.addCliente()}" update="@form"/>

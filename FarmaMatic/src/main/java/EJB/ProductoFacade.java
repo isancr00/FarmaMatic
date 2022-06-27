@@ -44,9 +44,13 @@ public class ProductoFacade extends AbstractFacade<Producto> implements Producto
             Date hoy = new Date();
             Date caducidad = listaDeProductos.get(i).getCaducidad();
             
-            if(caducidad.before(hoy) && (listaDeProductos.get(i).getVenta() != null)){
-                tirar.add(listaDeProductos.get(i));
+            
+            if(listaDeProductos.get(i).getVenta() == null){
+                if(caducidad.before(hoy)){
+                    tirar.add(listaDeProductos.get(i));
+                }   
             }
+            
             
         }
         return tirar;
