@@ -70,6 +70,11 @@ public class MenuController implements Serializable{
        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
        return "/index.xhtml?faces-redirect=true";
     }
+     
+      public String noPermiso(){  
+       FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+       return "/principal.xhtml?faces-redirect=true";
+    }
 
 
     public MenuModel getModelo() {

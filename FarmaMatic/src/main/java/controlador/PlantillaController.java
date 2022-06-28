@@ -31,10 +31,9 @@ public class PlantillaController implements Serializable{
         if(empleado!=null){
             if(!url.contains("Venta") && !url.contains("principal") && !url.contains("index") && !url.contains("dispensacion") && !url.contains("liente") && !url.contains("rod")){
                 if(!url.contains(empleado.getRol().getNombreRol().toLowerCase())){
-                    if(!url.contains("administrador")){
                        
-                            FacesContext.getCurrentInstance().getExternalContext().redirect("//localhost:8080/FarmaMatic/noPermiso.xhtml"); 
-                    }
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("//localhost:8080/FarmaMatic/noPermiso.xhtml"); 
+                    
                 }
             }
            
